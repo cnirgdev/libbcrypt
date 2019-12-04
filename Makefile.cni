@@ -1,0 +1,11 @@
+BUILD_DIR := $(abspath $(shell pwd)/build)
+LIB_BCRYPT := build/libbcrypt.a
+
+all : $(LIB_BCRYPT)
+
+$(LIB_BCRYPT):
+	mkdir -p build
+	cd build && cmake .. && make && sudo make install && sudo ldconfig
+
+clean:
+	rm -rf build
