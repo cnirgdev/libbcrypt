@@ -1,11 +1,21 @@
 BUILD_DIR := $(abspath $(shell pwd)/build)
 LIB_BCRYPT := build/libbcrypt.a
 
+SDK_ROOT := $(abspath $(shell pwd)/../../otx-sdk-6.2.0)
+
+ifeq ($(PLATFORM), edge)
+        MARVELL_TOOLS_ROOT := $(SDK_ROOT)/marvell-tools-233.0
+        # compiler
+        CXX := $(MARVELL_TOOLS_ROOT)/bin/aarch64-marvell-linux-gnu-g++
+	CC  := $(MARVELL_TOOLS_ROOT)/bin/aarch64-marvell-linux-gnu-gcc
+endif
+
+
 all : $(LIB_BCRYPT)
 
 $(LIB_BCRYPT):
 	mkdir -p build
-	cd build && cmake .. && make
+	cd build && CC=$(CC) CXX=$(CXX) cmake3 .. && CC=$(CC) CXX=$(CXX) make
 
 clean:
 	rm -rf build
