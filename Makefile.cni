@@ -15,7 +15,7 @@ all : $(LIB_BCRYPT)
 
 $(LIB_BCRYPT):
 	mkdir -p build
-	cd build && CC=$(CC) CXX=$(CXX) cmake3 .. && CC=$(CC) CXX=$(CXX) make
+	cd build && CC=$(CC) CXX=$(CXX) LD_PATH=$(MARVELL_TOOLS_ROOT)/aarch64-marvell-linux-gnu/lib64 cmake3 .. && CC=$(CC) CXX=$(CXX) LD_PATH=$(MARVELL_TOOLS_ROOT)/aarch64-marvell-linux-gnu/lib64 make bcrypt
 
 clean:
 	rm -rf build
